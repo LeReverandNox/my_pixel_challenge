@@ -5,7 +5,7 @@
 
 // var tools = require("../lib/tools");
 const base64 = require('node-base64-image');
-
+const path = require("path");
 
 const pixelService = (server) => {
     const init = async () => {
@@ -28,13 +28,23 @@ const pixelService = (server) => {
 
     const downloadImage = async (url) => {
         return new Promise((resolve, reject) => {
-            const options = { string: true };
-            base64.encode(url, options, (err, image) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(image);
-            });
+            if (path.isAbsolute(url)) {
+                const options = { local: true, string: true };
+                base64.encode(url, options, (err, image) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(image);
+                });
+            } else {
+                const options = { string: true };
+                base64.encode(url, options, (err, image) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(image);
+                });
+            }
         });
     }
 
