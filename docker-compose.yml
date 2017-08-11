@@ -7,7 +7,7 @@ services:
     environment:
       - VIRTUAL_HOST=$MCP_HOST
       - VIRTUAL_PORT=3000
-
+    command: $IMG_URL $IMG_WIDTH $IMG_HEIGHT
   reverse-proxy:
     image: jwilder/nginx-proxy
     ports:

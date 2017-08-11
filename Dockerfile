@@ -19,4 +19,4 @@ ADD src /src
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+ENTRYPOINT ["npm", "run", "start", "--"]
