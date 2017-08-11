@@ -21,7 +21,7 @@ const pixelService = (server) => {
         this.imgHeight = server.app.argv[2];
         this.imgData = await downloadImage(this.imgUrl);
 
-        this.shownPixels = [];
+        this.destroyedPixels = [];
 
         return true;
     };
@@ -46,10 +46,41 @@ const pixelService = (server) => {
                 });
             }
         });
+    };
+
+    const destroyPixel = (cell) => {
+        if (isPixelDestroyed(cell) || !isPixelInImage(cell))
+            return false;
+
+        addDestroyedPixel(cell);
+        return true;
+    };
+
+    const isPixelDestroyed = (cell) => {
+        return this.destroyedPixels.find(pixel => {
+            return pixel.x === cell.x && pixel.y === cell.y;
+        });
+    };
+
+    const isPixelInImage = (cell) => {
+        const isXOk = cell.x >= 0 && cell.x <= this.imgWidth;
+        const isYOk = cell.y >= 0 && cell.y <= this.imgHeight;
+
+        return isXOk && isYOk;
+    };
+
+    const addDestroyedPixel = (cell) => {
+        this.destroyedPixels.push(cell);
+    };
+
+    const getDestroyedPixels = () => {
+        return this.destroyedPixels;
     }
 
     return {
-        init: init
+        init: init,
+        destroyPixel: destroyPixel,
+        getDestroyedPixels: getDestroyedPixels
     };
 };
 
