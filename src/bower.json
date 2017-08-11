@@ -1,0 +1,11 @@
+{
+  "name": "my_pixel_challenge",
+  "description": "It's almost like chess... but a little different",
+  "main": "index.js",
+  "authors": [
+    "laidet_r"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true
+}
