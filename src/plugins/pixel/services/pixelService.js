@@ -93,7 +93,7 @@ const pixelService = (server) => {
         destroyPixel: destroyPixel,
         getDestroyedPixels: getDestroyedPixels,
         getImage: getImage,
-        getImageSize: getImageSizef
+        getImageSize: getImageSize
     };
 };
 
