@@ -4,18 +4,24 @@
 "use strict";
 
 exports.register = (server, options, next) => {
-    const io = require('socket.io')(server.listener);
 
-    const pixelService = require("./services/pixelService")(server).init();
+    const pixelService = require("./services/pixelService")(server);
     const handlers = require("./handlers")(pixelService);
 
-    io.on("connection", connectionHandler);
+    pixelService.init()
+        .then(() => {
+            const io = require('socket.io')(server.listener);
+            io.on("connection", connectionHandler);
 
-    function connectionHandler(socket) {
-        handlers.handleNewUser.action(socket);
-    }
+            function connectionHandler(socket) {
+                handlers.handleNewUser.action(socket);
+            }
 
-    next();
+            next();
+        })
+        .catch((err) => {
+            next(err);
+        });
 };
 
 exports.register.attributes = {
