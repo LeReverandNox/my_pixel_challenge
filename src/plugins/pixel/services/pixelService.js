@@ -77,10 +77,23 @@ const pixelService = (server) => {
         return this.destroyedPixels;
     }
 
+    const getImage = () => {
+        return this.imgData;
+    };
+
+    const getImageSize = () => {
+        return {
+            width: this.imgWidth,
+            height: this.imgHeight
+        };
+    };
+
     return {
         init: init,
         destroyPixel: destroyPixel,
-        getDestroyedPixels: getDestroyedPixels
+        getDestroyedPixels: getDestroyedPixels,
+        getImage: getImage,
+        getImageSize: getImageSizef
     };
 };
 

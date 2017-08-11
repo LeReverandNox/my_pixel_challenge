@@ -5,8 +5,12 @@
 
 const handlers = (pixelService, io) => {
     const handleNewUser = (socket) => {
-        console.log("Un user se connecte");
-    }
+        socket.emit("welcome", {
+            img: pixelService.getImage(),
+            size: pixelService.getImageSize(),
+            destroyedPixels: pixelService.getDestroyedPixels()
+        });
+    };
 
     const click = (cell, cb) => {
         if (typeof cell !== "object")
@@ -16,11 +20,11 @@ const handlers = (pixelService, io) => {
 
         const wasDestroyed = pixelService.destroyPixel(cell);
         if (wasDestroyed) {
-            const grid = pixelService.getDestroyedPixels();
-            console.log(grid);
-            io.sockets.emit("updateGrid", grid);
+            io.sockets.emit("updateGrid", {
+                grid: pixelService.getDestroyedPixels()
+            });
         }
-    }
+    };
 
     return {
         handleNewUser: handleNewUser,
