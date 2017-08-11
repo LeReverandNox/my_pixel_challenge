@@ -1,0 +1,17 @@
+version: '2'
+services:
+  my-pixel-challenge:
+    build: ./
+    volumes:
+      - $MPC_SRC:/src
+    environment:
+      - VIRTUAL_HOST=$MCP_HOST
+      - VIRTUAL_PORT=3000
+
+  reverse-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - $HTTP_PORT:80/tcp
+      - $HTTPS_PORT:443/tcp
+    volumes:
+      - $DOCKER_SOCK:/tmp/docker.sock:ro
