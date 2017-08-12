@@ -3,9 +3,9 @@
 
 "use strict";
 
-const base64 = require('node-base64-image');
+const base64 = require("node-base64-image");
 const path = require("path");
-const fileType = require('file-type');
+const fileType = require("file-type");
 
 const pixelService = (server) => {
     const init = async () => {

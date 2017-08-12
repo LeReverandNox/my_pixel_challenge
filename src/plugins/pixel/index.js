@@ -9,7 +9,7 @@ exports.register = (server, options, next) => {
 
     pixelService.init()
         .then(() => {
-            const io = require('socket.io')(server.listener);
+            const io = require("socket.io")(server.listener);
             io.on("connection", connectionHandler);
 
             const handlers = require("./handlers")(pixelService, io);
