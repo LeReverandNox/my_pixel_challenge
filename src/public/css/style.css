@@ -21,6 +21,7 @@ h1 {
 
 .grid-row {
     margin: 0;
+    padding: 0;
     height: 1px;
 }
 
@@ -29,4 +30,15 @@ h1 {
     height: 1px;
     display: inline-block;
     vertical-align: top;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    text-align: center;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0
 }
