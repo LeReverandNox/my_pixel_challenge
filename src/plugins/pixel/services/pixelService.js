@@ -3,7 +3,6 @@
 
 "use strict";
 
-// var tools = require("../lib/tools");
 const base64 = require('node-base64-image');
 const path = require("path");
 const fileType = require('file-type');
@@ -29,6 +28,11 @@ const pixelService = (server) => {
 
     const downloadImage = async (url) => {
         return new Promise((resolve, reject) => {
+            function errCb (err) {
+                console.error(err);
+                reject("Can't retrieve the image, please check the URL or the path. Exiting.");
+            };
+
             function toBase64(buffer) {
                 try {
                     const data = buffer.toString("base64");
@@ -36,7 +40,7 @@ const pixelService = (server) => {
 
                     resolve(`data:${type.mime};base64,${data}`);
                 } catch (err) {
-                    reject("Can't retrieve the image, please check the URL or the path. Exiting.");
+                    errCb(err);
                 }
             };
 
@@ -44,8 +48,7 @@ const pixelService = (server) => {
                 const options = { local: true};
                 base64.encode(url, options, (err, image) => {
                     if (err) {
-                        console.error(err);
-                        reject("Can't retrieve the image, please check the URL or the path. Exiting.");
+                        errCb(err);
                     }
                     toBase64(image);
                 });
@@ -53,8 +56,7 @@ const pixelService = (server) => {
                 const options = {};
                 base64.encode(url, options, (err, image) => {
                     if (err) {
-                        console.error(err);
-                        reject("Can't retrieve the image, please check the URL or the path. Exiting.");
+                        errCb(err);
                     }
                     toBase64(image);
                 });
