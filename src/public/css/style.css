@@ -1,0 +1,31 @@
+h1 {
+    text-align: center
+}
+
+#mpc_holder {
+    display: block;
+    border: 1px solid red;
+    transform: scale(30);
+    -moz-transform: scale(30);
+    -webkit-transform: scale(30);
+    transform-origin: 50% 0%;
+    -moz-transform-origin: 50% 0%;
+    -webkit-transform-origin: 50% 0%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+
+.grid-row {
+    margin: 0;
+    height: 1px;
+}
+
+.grid-cell {
+    width: 1px;
+    height: 1px;
+    display: inline-block;
+    vertical-align: top;
+}
