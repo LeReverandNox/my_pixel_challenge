@@ -3,6 +3,7 @@ h1 {
 }
 
 #mpc_holder {
+    background-size: contain;
     display: block;
     border: 1px solid red;
     transform: scale(30);
