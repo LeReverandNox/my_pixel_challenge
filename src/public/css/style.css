@@ -5,40 +5,27 @@ h1 {
 #mpc_holder {
     background-size: contain;
     display: block;
-    border: 1px solid red;
-    transform: scale(30);
-    -moz-transform: scale(30);
-    -webkit-transform: scale(30);
-    transform-origin: 50% 0%;
-    -moz-transform-origin: 50% 0%;
-    -webkit-transform-origin: 50% 0%;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+    border: 3px solid red;
+    background-repeat:no-repeat;
+    background-position: center center;
+    margin: 0 auto;
 }
 
 .grid-row {
-    margin: 0;
-    padding: 0;
-    height: 1px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
 }
 
 .grid-cell {
-    width: 1px;
-    height: 1px;
+    width: 30px;
+    height: 30px;
     display: inline-block;
     vertical-align: top;
-    margin: 0;
-    padding: 0;
 }
 
 footer {
+    margin-top: 15px;
     text-align: center;
     display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0
 }

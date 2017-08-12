@@ -54,8 +54,8 @@
 
     MyPixelChallenge.prototype.initImg = function () {
         this.$mpcHolder.css("background-image", "url('" + this.image + "')");
-        this.$mpcHolder.css("width", this.imageSize.width + "px");
-        this.$mpcHolder.css("height", this.imageSize.height + "px");
+        this.$mpcHolder.css("width", this.imageSize.width * 30 + "px");
+        this.$mpcHolder.css("height", this.imageSize.height * 30 + "px");
     };
 
     MyPixelChallenge.prototype.initGrid = function () {
@@ -71,8 +71,6 @@
             for (j = 0; j < this.imageSize.width; j += 1) {
                 $cell = $('<div class="grid-cell"></div>').appendTo($row);
                 $cell.css('background-color', colors[Math.floor(Math.random() * colors.length)]);
-                $cell.css("width", "1px");
-                $cell.css("height", "1px");
             }
         }
     };
