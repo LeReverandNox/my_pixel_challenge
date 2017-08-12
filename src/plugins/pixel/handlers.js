@@ -26,9 +26,15 @@ const handlers = (pixelService, io) => {
         }
     };
 
+    const reset = () => {
+        pixelService.resetDestroyedPixels();
+        io.sockets.emit("resetGrid");
+    };
+
     return {
         handleNewUser: handleNewUser,
-        click: click
+        click: click,
+        reset: reset
     };
 };
 

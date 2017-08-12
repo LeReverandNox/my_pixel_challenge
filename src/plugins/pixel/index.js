@@ -17,6 +17,7 @@ exports.register = (server, options, next) => {
                 handlers.handleNewUser(socket);
 
                 socket.on("click", handlers.click);
+                socket.on("reset", handlers.reset);
             }
 
             next();

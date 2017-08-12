@@ -11,6 +11,7 @@
         this.destroyedPixels = [];
         this.$mpcHolder = $("#mpc_holder");
         this.$mainWrapper = $(".main-wrapper");
+        this.$resetButton = $("#reset_button");
     };
 
     MyPixelChallenge.prototype.init = function () {
@@ -37,6 +38,11 @@
             self.destroyedPixels = data.grid;
             self.updateGrid();
         });
+
+        this.socket.on("resetGrid", function (data) {
+            self.destroyedPixels = [];
+            self.initGrid();
+        });
     };
 
     MyPixelChallenge.prototype.startDOMListeners = function () {
@@ -47,6 +53,10 @@
 
             self.destroyPixel(x, y);
         });
+
+        this.$resetButton.on("click", function (e) {
+            self.reset();
+        });
     };
 
     MyPixelChallenge.prototype.destroyPixel = function (x, y) {
@@ -54,6 +64,10 @@
             x: x,
             y: y
         });
+    };
+
+    MyPixelChallenge.prototype.reset = function () {
+        this.socket.emit("reset");
     };
 
     MyPixelChallenge.prototype.initImg = function () {

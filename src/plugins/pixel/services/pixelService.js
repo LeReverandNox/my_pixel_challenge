@@ -104,12 +104,17 @@ const pixelService = (server) => {
         };
     };
 
+    const resetDestroyedPixels = () => {
+        this.destroyedPixels = [];
+    };
+
     return {
         init: init,
         destroyPixel: destroyPixel,
         getDestroyedPixels: getDestroyedPixels,
         getImage: getImage,
-        getImageSize: getImageSize
+        getImageSize: getImageSize,
+        resetDestroyedPixels: resetDestroyedPixels
     };
 };
 
