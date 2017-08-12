@@ -10,6 +10,7 @@
         this.imageSize = null;
         this.destroyedPixels = [];
         this.$mpcHolder = $("#mpc_holder");
+        this.$mainWrapper = $(".main-wrapper");
     };
 
     MyPixelChallenge.prototype.init = function () {
@@ -56,30 +57,33 @@
     };
 
     MyPixelChallenge.prototype.initImg = function () {
-        this.$mpcHolder.css("background-image", "url('" + this.image + "')");
+        this.$mpcHolder.css("background-image", "url(\"" + this.image + "\")");
         this.$mpcHolder.css("width", this.imageSize.width * 30 + "px");
         this.$mpcHolder.css("height", this.imageSize.height * 30 + "px");
+
+        this.$mainWrapper.css("width", this.imageSize.width * 30 + "px");
+        this.$mainWrapper.css("height", this.imageSize.height * 30 + "px");
     };
 
     MyPixelChallenge.prototype.initGrid = function () {
         var i, j, $row, $cell;
         var colors = randomColor({
             count: 5,
-            hue: 'random'
+            hue: "random"
         });
 
         this.$mpcHolder.empty();
         for (i = 0; i < this.imageSize.height; i += 1) {
-            $row = $('<div class="grid-row"></div>').appendTo(this.$mpcHolder);
+            $row = $("<div class=\"grid-row\"></div>").appendTo(this.$mpcHolder);
             for (j = 0; j < this.imageSize.width; j += 1) {
-                $cell = $('<div class="grid-cell"></div>').appendTo($row);
-                $cell.css('background-color', colors[Math.floor(Math.random() * colors.length)]);
+                $cell = $("<div class=\"grid-cell\"></div>").appendTo($row);
+                $cell.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
             }
         }
     };
 
     MyPixelChallenge.prototype.findCellAt = function (x, y) {
-        return this.$mpcHolder.find('.grid-row').eq(y).find('.grid-cell').eq(x);
+        return this.$mpcHolder.find(".grid-row").eq(y).find(".grid-cell").eq(x);
 
     };
 
