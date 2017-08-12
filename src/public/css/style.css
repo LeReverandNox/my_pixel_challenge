@@ -1,20 +1,23 @@
+.main-wrapper {
+    margin: 0 auto;
+}
+
 h1 {
     text-align: center
 }
 
 #mpc_holder {
-    background-size: contain;
     display: block;
+    margin: 0 auto;
     border: 3px solid red;
+    background-size: contain;
     background-repeat:no-repeat;
     background-position: center center;
-    margin: 0 auto;
 }
 
 .grid-row {
     height: 30px;
     line-height: 30px;
-    display: inline-block;
 }
 
 .grid-cell {
@@ -27,5 +30,4 @@ h1 {
 footer {
     margin-top: 15px;
     text-align: center;
-    display: block;
 }
