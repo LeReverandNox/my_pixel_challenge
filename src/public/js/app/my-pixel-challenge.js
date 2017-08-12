@@ -1,3 +1,6 @@
+/*jslint this:true es6:true for:true */
+/*global window document io $ randomColor*/
+
 "use strict";
 
 (function (global) {
@@ -30,7 +33,7 @@
         });
 
         this.socket.on("updateGrid", function (data) {
-            self.destroyedPixels= data.grid;
+            self.destroyedPixels = data.grid;
             self.updateGrid();
         });
     };
@@ -94,4 +97,6 @@
         var mpc = new MyPixelChallenge();
         mpc.init();
     });
+
+    global.MyPixelChallenge = MyPixelChallenge;
 }(window));
