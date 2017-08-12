@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.5.7",
+    "file-type": "^5.2.0",
     "forever": "^0.15.3",
     "hapi": "^16.5.2",
     "inert": "^4.2.1",
