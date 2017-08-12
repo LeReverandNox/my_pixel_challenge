@@ -30,17 +30,22 @@ const pixelService = (server) => {
     const downloadImage = async (url) => {
         return new Promise((resolve, reject) => {
             function toBase64(buffer) {
-                const data = buffer.toString("base64");
-                const type = fileType(buffer);
+                try {
+                    const data = buffer.toString("base64");
+                    const type = fileType(buffer);
 
-                resolve(`data:${type.mime};base64,${data}`);
+                    resolve(`data:${type.mime};base64,${data}`);
+                } catch (err) {
+                    reject("Can't retrieve the image, please check the URL or the path. Exiting.");
+                }
             };
 
             if (path.isAbsolute(url)) {
                 const options = { local: true};
                 base64.encode(url, options, (err, image) => {
                     if (err) {
-                        reject(err);
+                        console.error(err);
+                        reject("Can't retrieve the image, please check the URL or the path. Exiting.");
                     }
                     toBase64(image);
                 });
@@ -48,7 +53,8 @@ const pixelService = (server) => {
                 const options = {};
                 base64.encode(url, options, (err, image) => {
                     if (err) {
-                        reject(err);
+                        console.error(err);
+                        reject("Can't retrieve the image, please check the URL or the path. Exiting.");
                     }
                     toBase64(image);
                 });
