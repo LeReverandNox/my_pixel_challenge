@@ -61,8 +61,8 @@
         this.$mpcHolder.css("width", this.imageSize.width * 30 + "px");
         this.$mpcHolder.css("height", this.imageSize.height * 30 + "px");
 
-        this.$mainWrapper.css("width", this.imageSize.width * 30 + "px");
-        this.$mainWrapper.css("height", this.imageSize.height * 30 + "px");
+        this.$mainWrapper.css("min-width", this.imageSize.width * 30 + "px");
+        this.$mainWrapper.css("min-height", this.imageSize.height * 30 + "px");
     };
 
     MyPixelChallenge.prototype.initGrid = function () {
