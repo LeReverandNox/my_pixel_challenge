@@ -12,7 +12,7 @@ const handlers = (pixelService, io) => {
         });
     };
 
-    const click = (cell, cb) => {
+    const click = (cell) => {
         if (typeof cell !== "object")
             return false;
         if (!cell.hasOwnProperty("x") || !cell.hasOwnProperty("y"))
