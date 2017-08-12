@@ -2,8 +2,10 @@ version: '2'
 services:
   my-pixel-challenge:
     build: ./
-    volumes:
-      - $MPC_SRC:/src
+    # volumes:
+      # DEV PURPOSE ONLY
+      # - $MPC_SRC:/src
+      # - $IMG_PATH:$IMG_URL
     environment:
       - VIRTUAL_HOST=$MCP_HOST
       - VIRTUAL_PORT=3000
