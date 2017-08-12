@@ -27,6 +27,11 @@ h1 {
     vertical-align: top;
 }
 
+#reset_holder {
+    text-align: center;
+    margin: 10px;
+}
+
 footer {
     margin-top: 15px;
     text-align: center;
