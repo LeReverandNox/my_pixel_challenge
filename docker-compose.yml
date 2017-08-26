@@ -7,7 +7,7 @@ services:
       # - $MPC_SRC:/src
       # - $IMG_PATH:$IMG_URL
     environment:
-      - VIRTUAL_HOST=$MCP_HOST
+      - VIRTUAL_HOST=$MPC_HOST
       - VIRTUAL_PORT=3000
     command: $IMG_URL $IMG_WIDTH $IMG_HEIGHT
   reverse-proxy:
