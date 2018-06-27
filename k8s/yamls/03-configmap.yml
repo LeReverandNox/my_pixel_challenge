@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-pixel-challenge-config
+  namespace: my-pixel-challenge
+data:
+  IMG_URL: http://art.ngfiles.com/images/162000/162501_petelavadigger_super-mario-pixel.png
+  IMG_WIDTH: "20"
+  IMG_HEIGHT: "20"

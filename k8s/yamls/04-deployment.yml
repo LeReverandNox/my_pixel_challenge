@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-pixel-challenge-deployment
+  namespace: my-pixel-challenge
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-pixel-challenge
+    spec:
+      containers:
+      - name: my-pixel-challenge
+        image: lereverandnox/my_pixel_challenge
+        args: ["$IMG_URL", "$IMG_WIDTH", "$IMG_HEIGHT"]
+        env:
+        - name: IMG_URL
+          valueFrom:
+            configMapKeyRef:
+              name: my-pixel-challenge-config
+              key: IMG_URL
+        - name: IMG_WIDTH
+          valueFrom:
+            configMapKeyRef:
+              name: my-pixel-challenge-config
+              key: IMG_WIDTH
+        - name: IMG_HEIGHT
+          valueFrom:
+            configMapKeyRef:
+              name: my-pixel-challenge-config
+              key: IMG_HEIGHT
+        imagePullPolicy: IfNotPresent # Mandatory if local image
+        # HEALTH CHECK
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 2
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 2
+          successThreshold: 2
+          timeoutSeconds: 2
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+          name: mpc-http
+      restartPolicy: Always
