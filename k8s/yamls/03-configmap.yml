@@ -4,6 +4,6 @@ metadata:
   name: my-pixel-challenge-config
   namespace: my-pixel-challenge
 data:
-  IMG_URL: http://art.ngfiles.com/images/162000/162501_petelavadigger_super-mario-pixel.png
+  IMG_URL: https://i.pinimg.com/originals/ec/71/71/ec7171a9b6885a5becf4ae94d915a3d0.jpg
   IMG_WIDTH: "20"
   IMG_HEIGHT: "20"
