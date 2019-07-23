@@ -18,6 +18,11 @@ RUN bower install
 
 ADD src /src
 
+USER root
+RUN find /src ! -name node_modules -exec chown -R node:node {} \;
+
+USER node
+
 EXPOSE 3000
 
 ENTRYPOINT ["npm", "run", "start", "--"]
