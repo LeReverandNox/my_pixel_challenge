@@ -3,25 +3,18 @@ FROM node:8.3
 RUN npm install -g bower
 
 RUN mkdir /src
-
+RUN chown -R node:node /src
 WORKDIR /src
 
-ADD src/package.json /src
-ADD src/bower.json /src
-ADD src/.bowerrc /src
-
-RUN chown -R node:node /src
+ADD --chown=node:node  src/package.json /src
+ADD --chown=node:node  src/bower.json /src
+ADD --chown=node:node  src/.bowerrc /src
 
 USER node
 RUN npm install
 RUN bower install
 
-ADD src /src
-
-USER root
-RUN find /src ! -name node_modules -exec chown -R node:node {} \;
-
-USER node
+ADD --chown=node:node src /src
 
 EXPOSE 3000
 
