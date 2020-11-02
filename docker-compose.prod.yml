@@ -1,0 +1,22 @@
+version: "3"
+services:
+  my-pixel-challenge:
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      # HTTP
+      - traefik.http.routers.mpx-http.entrypoints=http
+      - traefik.http.routers.mpx-http.rule=Host("$MPC_HOST")
+
+      # Redirect
+      - traefik.http.routers.mpx-http.middlewares=https-redirect@docker
+
+      # HTTPS
+      - traefik.http.routers.mpx-https.entrypoints=https
+      - traefik.http.routers.mpx-https.rule=Host("$MPC_HOST")
+      - traefik.http.routers.mpx-https.tls=true
+      - traefik.http.routers.mpx-https.tls.certresolver=le-prod
+networks:
+  proxy:
+    external: true

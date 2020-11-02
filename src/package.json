@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "forever --minUptime 1 -c 'nodemon -e js,ejs --exitcrash' index.js"
+    "start": "forever --minUptime 1 index.js",
+    "dev": "forever --minUptime 1 -c 'nodemon -e js,ejs --exitcrash' index.js"
   },
   "author": "laidet_r",
   "license": "ISC",
