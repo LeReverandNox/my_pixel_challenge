@@ -3,8 +3,8 @@
 
 "use strict";
 
-(function (global) {
-    var MyPixelChallenge = function () {
+class MyPixelChallenge {
+    constructor() {
         this.socket = null;
         this.image = null;
         this.imageSize = null;
@@ -12,76 +12,67 @@
         this.$mpcHolder = $("#mpc_holder");
         this.$mainWrapper = $(".main-wrapper");
         this.$resetButton = $("#reset_button");
-    };
-
-    MyPixelChallenge.prototype.init = function () {
         this.socket = io();
 
         this.startSocketListeners();
         this.startDOMListeners();
-    };
+    }
 
-    MyPixelChallenge.prototype.startSocketListeners = function () {
-        var self = this;
+    startSocketListeners() {
+        this.socket.on("welcome", data => {
+            this.image = data.img;
+            this.imageSize = data.size;
+            this.destroyedPixels = data.destroyedPixels;
 
-        this.socket.on("welcome", function (data) {
-            self.image = data.img;
-            self.imageSize = data.size;
-            self.destroyedPixels = data.destroyedPixels;
-
-            self.initImg();
-            self.initGrid();
-            self.updateGrid();
+            this.initImg();
+            this.initGrid();
+            this.updateGrid();
         });
 
-        this.socket.on("updateGrid", function (data) {
-            self.destroyedPixels = data.grid;
-            self.updateGrid();
+        this.socket.on("updateGrid", data => {
+            this.destroyedPixels = data.grid;
+            this.updateGrid();
         });
 
-        this.socket.on("resetGrid", function (data) {
-            self.destroyedPixels = [];
-            self.initGrid();
+        this.socket.on("resetGrid", data => {
+            this.destroyedPixels = [];
+            this.initGrid();
         });
-    };
+    }
 
-    MyPixelChallenge.prototype.startDOMListeners = function () {
-        var self = this;
-        this.$mpcHolder.on("click", function (e) {
-            var x = $(e.target).index();
-            var y = $(e.target.parentElement).index();
+    startDOMListeners() {
+        this.$mpcHolder.on("click", e => {
+            const x = $(e.target).index();
+            const y = $(e.target.parentElement).index();
 
-            self.destroyPixel(x, y);
+            this.destroyPixel(x, y);
         });
 
-        this.$resetButton.on("click", function (e) {
-            self.reset();
+        this.$resetButton.on("click", e => {
+            this.reset();
         });
-    };
+    }
 
-    MyPixelChallenge.prototype.destroyPixel = function (x, y) {
-        this.socket.emit("click", {
-            x: x,
-            y: y
-        });
-    };
+    destroyPixel(x, y) {
+        this.socket.emit("click", {x, y});
+    }
 
-    MyPixelChallenge.prototype.reset = function () {
+    reset() {
         this.socket.emit("reset");
-    };
+    }
 
-    MyPixelChallenge.prototype.initImg = function () {
+    initImg() {
         this.$mpcHolder.css("background-image", "url(\"" + this.image + "\")");
         this.$mpcHolder.css("width", this.imageSize.width * 30 + "px");
         this.$mpcHolder.css("height", this.imageSize.height * 30 + "px");
 
         this.$mainWrapper.css("min-width", this.imageSize.width * 30 + "px");
         this.$mainWrapper.css("min-height", this.imageSize.height * 30 + "px");
-    };
+    }
 
-    MyPixelChallenge.prototype.initGrid = function () {
-        var i, j, $row, $cell;
-        var colors = randomColor({
+    initGrid() {
+        let i, j, $row, $cell;
+        const colors = randomColor({
             count: 5,
             hue: "random"
         });
@@ -94,27 +85,23 @@
                 $cell.css("background-color", colors[Math.floor(Math.random() * colors.length)]);
             }
         }
-    };
+    }
 
-    MyPixelChallenge.prototype.findCellAt = function (x, y) {
+    findCellAt(x, y) {
         return this.$mpcHolder.find(".grid-row").eq(y).find(".grid-cell").eq(x);
+    }
 
-    };
-
-    MyPixelChallenge.prototype.updateGrid = function () {
-        var self = this;
-        var $cell;
-        this.destroyedPixels.forEach(function (pixel) {
-            $cell = self.findCellAt(pixel.x, pixel.y);
-            $cell.css("background-color", "transparent");
+    updateGrid() {
+        this.destroyedPixels.forEach(({x, y}) => {
+            this.findCellAt(x, y).css("background-color", "transparent");
         });
-    };
+    }
+}
 
-
-    document.addEventListener("DOMContentLoaded", function () {
-        var mpc = new MyPixelChallenge();
-        mpc.init();
+(global => {
+    document.addEventListener("DOMContentLoaded", () => {
+         new MyPixelChallenge();
     });
 
     global.MyPixelChallenge = MyPixelChallenge;
-}(window));
+})(window);
