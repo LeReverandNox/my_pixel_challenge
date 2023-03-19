@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: my-pixel-challenge
-        image: lereverandnox/my_pixel_challenge
+        image: ghcr.io/lereverandnox/my_pixel_challenge:1.0.0
         args: ["$IMG_URL", "$IMG_WIDTH", "$IMG_HEIGHT"]
         env:
         - name: IMG_URL
